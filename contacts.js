@@ -1,11 +1,14 @@
 /*
- * Розкоментуйте і запиши значення
- const contactsPath = ;
- */
+ * Розкоментуйте і запиши значення*/
+const path = require("path");
+const fs = require("fs");
+
+const contactsPath = "./db/contacts.json";
+console.log(contactsPath);
 
 // TODO: задокументувати кожну функцію
 function listContacts() {
-  // ...твій код
+  //my code
 }
 
 function getContactById(contactId) {
