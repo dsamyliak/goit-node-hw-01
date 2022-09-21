@@ -1,31 +1,54 @@
-/*
- * Розкоментуйте і запиши значення*/
+/* Розкоментуйте і запиши значення*/
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs/promises");
+const { nanoid } = require("nanoid");
 
-// const contactsPath = `${__dirname}/db/contacts.json`;
-// const contactsPath =
-//   path.dirname(`${__dirname}/db/contacts.json`) +
-//   "/" +
-//   path.basename(`${__dirname}/db/contacts.json`);
 const contactsPath = path.join(__dirname, "db/contacts.json");
 
 console.log(contactsPath);
 
+const updateContacts = async (contacts) =>
+  await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+
 // TODO: задокументувати кожну функцію
-function listContacts() {
-  const data = fs.readFile(contactsPath, "utf-8");
+// function listContacts() { };
+const listContacts = async () => {
+  const data = await fs.readFile(contactsPath);
   return JSON.parse(data);
-}
+};
 
-function getContactById(contactId) {
-  // ...твій код
-}
+// function getContactById(contactId) { };
+const getContactById = async (contactId) => {
+  const contacts = await listContacts();
+  const id = String(contactId);
+  const result = contacts.find((item) => item.id === id);
+  return result || null;
+};
 
-function removeContact(contactId) {
-  // ...твій код
-}
+// function removeContact(contactId) { };
+const removeContact = async (contactId) => {
+  const contacts = await listContacts();
+  const index = contacts.findIndex((item) => item.id === contactId);
+  if (index === -1) {
+    return null;
+  }
+  const [newContacts] = contacts.splice(index, 1);
+  await updateContacts(contacts);
+  return newContacts;
+};
 
-function addContact(name, email, phone) {
-  // ...твій код
-}
+// function addContact(name, email, phone) { };
+const addContact = async ({ name, email, phone }) => {
+  const contacts = await listContacts();
+  const newContact = { id: nanoid(), name, email, phone };
+  contacts.push(newContact);
+  await updateContacts(contacts);
+  return newContact;
+};
+
+module.exports = {
+  listContacts,
+  getContactById,
+  removeContact,
+  addContact,
+};
