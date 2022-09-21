@@ -11,3 +11,6 @@ https://monosnap.com/file/gtkFq3XzblASn7Hs1AlrRb7bxgQbmn
 
 action remove:
 https://monosnap.com/file/wObosTFvkScC9vAXWk0JOUr5GEwfDm
+
+edited contacts.json:
+https://monosnap.com/file/VTrZYQWRSItNYoaSiVJ7Gj3ptHv4ka
