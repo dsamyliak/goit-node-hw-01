@@ -1,6 +1,5 @@
 //contacts and action
-const contacts = require("./index");
-console.log(contacts);
+const contacts = require("./contacts");
 
 const { Command } = require("commander");
 const program = new Command();
